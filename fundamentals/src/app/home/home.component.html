@@ -1,0 +1,41 @@
+<h1>Welcome!</h1>
+
+<!-- 1. <div class="home-container" [style.background-color]="clickCounter > 4 ? 'yellow' : 'lightgray'"> -->
+
+<!-- 2. style binding multiple css properties -->
+<!-- <div class="home-container" [ngStyle]="{
+  'background-color': clickCounter > 4 ? 'yellow' : 'lightgray',
+  'border':           clickCounter > 4 ? '4px solid black' : 'none'}
+"> -->
+
+<!-- 3. style using class binding -->
+<!-- <div class="home-container" [class.active]="clickCounter > 4"> -->
+
+<!-- 4. style using class binding -->
+<div class="home-container" [ngClass]="setClasses()">
+
+  <p>You've clicked <button (click)="countClick()">this</button> {{ clickCounter }} times.</p>
+
+  <p>
+    <input type="text" [(ngModel)]="name"><br>
+    <strong>You said: </strong> {{ name }}
+  </p>
+
+  <ng-template [ngIf]="clickCounter > 4" [ngIfElse]="none">
+    <p>The click counter <strong>IS GREATER</strong> than 4.</p>
+  </ng-template>
+
+  <!-- #none is a template name -->
+  <ng-template #none>
+    <p>The click counter is <strong>not greater</strong> than 4.</p>
+  </ng-template>
+
+</div>
+
+<!-- 
+(click) - is a click event
+
+coming from component logic (aka props):
+countClick() - method
+{{ clickCounter }} - is interpolation 
+-->

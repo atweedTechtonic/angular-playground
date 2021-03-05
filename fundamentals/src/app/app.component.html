@@ -1,0 +1,17 @@
+<header>
+  <div class="container">
+    <!-- link together different pages of app -->
+    <a routerLink="/" class="logo">CoolApp</a>
+    <nav>
+      <ul>
+        <li><a href="#" routerLink="/">Home</a></li>
+        <li><a href="#" routerLink="/list">List</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+  <!-- where routed components are displayed within the template -->
+  <router-outlet></router-outlet>
+</div>
