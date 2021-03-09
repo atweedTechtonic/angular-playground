@@ -1,0 +1,7 @@
+<h2 class='hero'>{{hero.name | uppercase}} Details</h2>
+<div class='hero-id'><span>id: </span>{{hero.id}}</div>
+<div class='hero-name'>
+  <label for='name'>Hero name: </label>
+  <!-- ngModel allows 2-way binding for hero.name (requires FormsModule)-->
+  <input id='name' [(ngModel)]="hero.name" placeholder="name">
+</div>
