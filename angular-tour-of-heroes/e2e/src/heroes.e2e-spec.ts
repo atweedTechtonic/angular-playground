@@ -8,17 +8,48 @@ describe('Heroes Component Functionality', () => {
     test = new HeroComponent();
   });
 
-  it('should correctly display the title, id and name of a hero character)', async () => {
+  it('should display a list of hero characters', async () => {
     await test.navigateTo();
-    expect(await test.getHeroTitleText()).toEqual('WINDSTORM Details');
-    expect(await test.getHeroPageId()).toEqual('id: 1');
-    expect(await test.getHeroPageName()).toEqual('Windstorm');
+
+    const heroList = [
+      '11 Dr Nice',
+      '12 Narco',
+      '13 Bombasto',
+      '14 Celeritas',
+      '15 Magneta',
+      '16 RubberMan',
+      '17 Dynama',
+      '18 Dr IQ',
+      '19 Magma',
+      '20 Tornado',
+    ];
+
+    await test
+      .getAllHeros()
+      .getText()
+      .then((heroes) => {
+        expect(heroes.length).toEqual(10);
+        expect(heroes[0]).toEqual('11 Dr Nice');
+        expect(heroes).toEqual(heroList);
+      });
   });
 
-  it('should display updated name for a hero character)', async () => {
+  it('should correctly display the title, id and name of a clicked hero', async () => {
+    await test.navigateTo(); //
+    await test.selectHero(4); // click on a hero in position 4
+    expect(await test.getHeroTitle().getText()).toEqual('MAGNETA Details');
+    expect(await test.getHeroId().getText()).toEqual('id: 15');
+    expect(await test.getHeroName().getAttribute('value')).toEqual('Magneta');
+  });
+
+  it('should display the updated name for an edited hero character', async () => {
     await test.navigateTo();
-    await test.setHeroPageName('Thor');
-    expect(await test.getHeroPageName()).toEqual('Thor');
+    await test.selectHero(2);
+    const heroName = await test.getHeroName();
+    expect(heroName.isPresent()).toBe(true); // test if selector exists
+    await heroName.clear();
+    await heroName.sendKeys('Thor');
+    expect(await test.getHeroName().getAttribute('value')).toEqual('Thor');
   });
 });
 

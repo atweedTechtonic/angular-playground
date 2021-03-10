@@ -1,7 +1,19 @@
-<h2 class='hero'>{{hero.name | uppercase}} Details</h2>
-<div class='hero-id'><span>id: </span>{{hero.id}}</div>
-<div class='hero-name'>
-  <label for='name'>Hero name: </label>
-  <!-- ngModel allows 2-way binding for hero.name (requires FormsModule)-->
-  <input id='name' [(ngModel)]="hero.name" placeholder="name">
+<h2 class="hero-title">My Heroes</h2>
+<ul class="heroes">
+  <!-- class binding adds .selected-->
+  <li *ngFor="let hero of heroes" [class.selected]="hero === selectedHero" (click)="onSelect(hero)">
+    <span class="badge">{{hero.id}}</span> {{hero.name}}
+  </li>
+</ul>
+
+<!-- wrapper in case no selected hero (conditional render)-->
+<div *ngIf="selectedHero">
+
+  <h2 class="hero">{{selectedHero.name | uppercase}} Details</h2>
+  <div class="hero-id"><span>id: </span>{{selectedHero.id}}</div>
+  <div class="hero-input">
+    <label for="hero-name">Hero name: </label>
+    <input id="hero-name" [(ngModel)]="selectedHero.name" placeholder="name">
+  </div>
+
 </div>
