@@ -1,15 +1,15 @@
 import { browser, logging } from 'protractor';
-import { HeroComponent } from './hero.po';
+import { HeroPage } from './hero.po';
 
-describe('Heroes Component Functionality', () => {
-  let test: HeroComponent;
+describe('Heroes Page Functionality', () => {
+  let page: HeroPage;
 
   beforeEach(() => {
-    test = new HeroComponent();
+    page = new HeroPage();
   });
 
   it('should display a list of hero characters', async () => {
-    await test.navigateTo();
+    await page.navigateTo();
 
     const heroList = [
       '11 Dr Nice',
@@ -24,7 +24,7 @@ describe('Heroes Component Functionality', () => {
       '20 Tornado',
     ];
 
-    await test
+    await page
       .getAllHeros()
       .getText()
       .then((heroes) => {
@@ -35,21 +35,21 @@ describe('Heroes Component Functionality', () => {
   });
 
   it('should correctly display the title, id and name of a clicked hero', async () => {
-    await test.navigateTo(); //
-    await test.selectHero(4); // click on a hero in position 4
-    expect(await test.getHeroTitle().getText()).toEqual('MAGNETA Details');
-    expect(await test.getHeroId().getText()).toEqual('id: 15');
-    expect(await test.getHeroName().getAttribute('value')).toEqual('Magneta');
+    await page.navigateTo(); //
+    await page.selectHero(4); // click on a hero in position 4
+    expect(await page.getHeroTitle().getText()).toEqual('MAGNETA Details');
+    expect(await page.getHeroId().getText()).toEqual('id: 15');
+    expect(await page.getHeroName().getAttribute('value')).toEqual('Magneta');
   });
 
-  it('should display the updated name for an edited hero character', async () => {
-    await test.navigateTo();
-    await test.selectHero(2);
-    const heroName = await test.getHeroName();
+  it('should display the updated name for an hero character', async () => {
+    await page.navigateTo();
+    await page.selectHero(2);
+    const heroName = await page.getHeroName();
     expect(heroName.isPresent()).toBe(true); // test if selector exists
     await heroName.clear();
     await heroName.sendKeys('Thor');
-    expect(await test.getHeroName().getAttribute('value')).toEqual('Thor');
+    expect(await page.getHeroName().getAttribute('value')).toEqual('Thor');
   });
 });
 

@@ -1,27 +1,28 @@
 import { browser, by, element } from 'protractor';
 
-export class HeroComponent {
+export class HeroPage {
   async navigateTo(): Promise<unknown> {
     return browser.get(browser.baseUrl);
   }
 
-  async getHeroTitleText(): Promise<string> {
-    return element(by.css('.hero')).getText();
+  getHeroTitle() {
+    return element(by.css('.hero'));
   }
 
-  async getHeroPageId(): Promise<string> {
-    return element(by.css('.hero-id')).getText();
+  getHeroId() {
+    return element(by.css('.hero-id'));
   }
 
-  async getHeroPageName(): Promise<string> {
-    // better way to get input value?
-    return element(by.id('name')).getAttribute('value');
+  getHeroName() {
+    return element(by.id('hero-name'));
   }
 
-  async setHeroPageName(newName): Promise<unknown> {
-    // possibly to chain?
-    const nameValue = element(by.id('name'));
-    nameValue.clear();
-    return nameValue.sendKeys(newName);
+  selectHero(position: number) {
+    // TODO: what if I use '.heroes li'
+    return element.all(by.css('.badge')).get(position).click();
+  }
+
+  getAllHeros() {
+    return element.all(by.css('.heroes li'));
   }
 }

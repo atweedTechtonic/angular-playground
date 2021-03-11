@@ -1,0 +1,11 @@
+<!-- wrapper in case no selected hero (conditional render)-->
+<div *ngIf="hero">
+
+  <h2 class="hero">{{hero.name | uppercase}} Details</h2>
+  <div class="hero-id"><span>id: </span>{{hero.id}}</div>
+  <div class="hero-input">
+    <label for="hero-name">Hero name: </label>
+    <input id="hero-name" [(ngModel)]="hero.name" placeholder="name">
+  </div>
+
+</div>
